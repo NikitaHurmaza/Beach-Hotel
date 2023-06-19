@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Beach Hotel</title>
+  <link th:rel="stylesheet" type="text/css" th:href="style.css">
+  <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+</head>
+
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/}"><img src="images/logo.png" class="logo"   alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="facilitiesDropdown" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">Rooms</a>
+            <ul class="dropdown-menu" aria-labelledby="facilitiesDropdown">
+              <li><a class="dropdown-item" th:href="@{/Double-Room}">Double Room</a></li>
+              <li><a class="dropdown-item" th:href="@{/Triple-Room}">Triple Room</a></li>
+              <li><a class="dropdown-item" th:href="@{/Deluxe-Room}">Deluxe room</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading1">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/Reservation}">Book</a>
+          </li>
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/invoice}">Invoice</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/admin_page}" sec:authorize="hasRole('ROLE_ADMIN')" style="color: red">Admin-page</a>
+            </li>
+          </div>
+        </ul>
+        <ul class="navbar-nav">
+
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal == null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/registration}">Register</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal == null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+
+<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-body">
+    Welcome to our hotel! Enjoy your stay.
+    <div class="mt-2 pt-2 border-top">
+      <a th:href="@{/Reservation}">
+      <button type="button" class="image-button1">Book Now</button>
+      </a>
+      <button type="button" class="image-button2" data-bs-dismiss="toast">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="container"  >
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="tab">
+        <h5 style="text-align: center; margin-top: 440px; ">Rooms</h5>
+        <hr style="width: 58px; height: 3px; color: #d7b908; background-color: #c49e04;  margin: 0 auto;">
+        <ul class="room-list">
+          <li>
+            <a th:href="@{/Double-Room}" class="room-link">
+              <img src="images/im.jpg" class="first-image" alt="Triple room">
+            </a>
+            <h5 style=" font-family: 'Baskerville Old Face'">Double Room</h5>
+            <p style="margin-top: 10px;max-width: 340px; font-family: 'Calibri Light'">Our double rooms are 20m2 and have twin beds or french beds. At least 1 adult and at the most 2 + 1 adults could accommodate in these rooms.</p>
+            <a th:href="@{/Double-Room}">
+            <button class="image-button" >VIEW ROOM</button>
+          </a>
+          </li>
+          <li>
+            <a th:href="@{/Triple-Room}" class="room-link" >
+              <img src="images/img.jpg" class="second-image" alt="Triple room">
+            </a>
+            <h5 style="margin-left: 105px; font-family: 'Baskerville Old Face'">Triple Room</h5>
+            <p style="margin-top: 10px; margin-left: 105px; font-family: 'Calibri Light'">Our triple rooms are 23m2 and 33 m2. Each room has one french bed and twin bed. 3 adults could accommodate in these rooms.</p>
+            <a th:href="@{/Triple-Room}">
+            <button   style="margin-left: 105px" class="image-button" id="scrollspyHeading1">VIEW ROOM</button>
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/Deluxe-Room}" class="room-link" >
+              <img src="images/lux11.jpg" class="third-image" alt="Deluxe room">
+            </a>
+            <h5 style="margin-left: 177px;  font-family: 'Baskerville Old Face'">Deluxe Room</h5>
+            <p style="margin-top: 10px; margin-left: 177px; font-family: 'Calibri Light'">Our deluxe room is 40m2 and have a french bed. At least 1 adult and at the most 5 adults could accommodate in this room</p>
+            <a th:href="@{/Deluxe-Room}">
+            <button style="margin-left: 175px" class="image-button" >VIEW ROOM</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+<div class="container" >
+  <div class="row justify-content-center">
+    <div class="col-lg-8" >
+      <div class="tab" >
+        <h5 style="text-align: center; margin-top: 100px;">Gallery</h5>
+        <hr style="width: 58px; height: 3px; color: #d7b908; background-color: #c49e04;  margin: 0 auto;">
+        <div id="carouselExampleIndicators" class="carousel slide" style="width: 90%; margin: 0 auto;margin-top: 80px ">
+          <div class="carousel-indicators" >
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner" >
+            <div class="carousel-item active">
+              <img src="images/Pool.jpg" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="images/hotel.jpg" class="d-block w-100">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+
+<footer>
+  <p style="font-family: 'Calibri Light'; text-align: center; margin-top: 30px">Images and information sourced from open sources.</p>
+</footer>
+</body>
+</html>

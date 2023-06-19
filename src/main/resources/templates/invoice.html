@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Beach Hotel - Invoice</title>
+  <link th:rel="stylesheet" type="text/css" th:href="InvoiceStyle.css">
+
+  <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/}"><img src="images/logo.png" class="logo"   alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="facilitiesDropdown" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">Rooms</a>
+            <ul class="dropdown-menu" aria-labelledby="facilitiesDropdown">
+              <li><a class="dropdown-item" th:href="@{/Double-Room}">Double Room</a></li>
+              <li><a class="dropdown-item" th:href="@{/Triple-Room}">Triple Room</a></li>
+              <li><a class="dropdown-item" th:href="@{/Deluxe-Room}">Deluxe room</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading1">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/Reservation}">Book</a>
+          </li>
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/invoice}">Invoice</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/admin_page}" sec:authorize="hasRole('ROLE_ADMIN')" style="color: red">Admin-page</a>
+            </li>
+          </div>
+        </ul>
+        <ul class="navbar-nav">
+
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal == null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/registration}">Register</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal == null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Passport</th>
+    <th>Type of Room</th>
+    <th>Check-in Date</th>
+    <th>Check-out Date</th>
+    <th>Total Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="guest : ${guest}">
+    <td th:text="${guest.id}"></td>
+    <td th:text="${guest.passport}"></td>
+    <td th:text="${guest.typeOfRoomRes}"></td>
+    <td th:text="${guest.checkIn}"></td>
+    <td th:text="${guest.checkOut}"></td>
+    <td th:text="${guest.totalPrice}"></td>
+  </tr>
+  </tbody>
+</table>
+<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

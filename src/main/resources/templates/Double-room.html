@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Beach Hotel</title>
+  <link th:rel="stylesheet" type="text/css" th:href="style.css">
+  <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+</head>
+
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/}"><img src="images/logo.png" class="logo"   alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="facilitiesDropdown" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">Rooms</a>
+            <ul class="dropdown-menu" aria-labelledby="facilitiesDropdown">
+              <li><a class="dropdown-item" th:href="@{/Double-Room}">Double Room</a></li>
+              <li><a class="dropdown-item" th:href="@{/Triple-Room}">Triple Room</a></li>
+              <li><a class="dropdown-item" th:href="@{/Deluxe-Room}">Deluxe room</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading1">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/Reservation}">Book</a>
+          </li>
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/invoice}">Invoice</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/admin_page}" sec:authorize="hasRole('ROLE_ADMIN')" style="color: red">Admin-page</a>
+            </li>
+          </div>
+        </ul>
+        <ul class="navbar-nav">
+
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal == null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/registration}">Register</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal == null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+
+<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+  <div class="container" >
+    <div class="row justify-content-center">
+      <div class="col-lg-8" >
+        <div class="tab" >
+          <h5 style="text-align: center; margin-top: 400px; margin-left: 440px">Double room</h5>
+          <hr style="width: 58px; height: 3px; color: #d7b908; background-color: #c49e04;  margin: 0 620px; ">
+          <div id="carouselExampleIndicators" class="carousel slide" style="width: 80%; margin: 0 auto;margin-top: 80px ">
+            <div class="carousel-indicators" >
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner" >
+              <div class="carousel-item active">
+                <img src="images/im.jpg" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="images/WC.jpg" class="d-block w-100">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <div class="room-description" style="margin-left: 85px; margin-top: 50px" >
+            <h4 style=" font-family: Varela;">Room Description</h4>
+            <p style="font-family: 'Calibri Light'; max-width: 600px">Our double rooms are 20m2 and have twin beds or french beds. At least 1 adult and at the most 2 + 1 adults could accommodate in these rooms. </p>
+            <p style="font-family: 'Calibri Light'; max-width: 600px">These rooms are ceramic-floored and have split-air conditioner, 82cm Led TV, bathroom and WC, internet access (wi-fi), safety deposit box, hair drier, mini-bar, direct telephone and balcony. </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4" style="margin-top: 514px">
+        <div class="room-info">
+          <h3 style=" font-family: Varela;">Services</h3>
+
+          <p style="margin-top: 50px">  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>Balcony</p>
+          <p>  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>Bathroom WC</p>
+          <p>  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>Hair Dryer</p>
+          <p>  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>Free Wifi</p>
+          <p>  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>Mini-bar</p>
+          <p>  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>82cm Led TV</p>
+          <p>  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>Safety-deposit box</p>
+          <p>  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>direct telephone</p>
+          <p>  <i class="bi bi-bookmark-check" style="color: #e1ba19"></i>Split-air conditioner</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+
+<footer>
+  <p style="font-family: 'Calibri Light'; text-align: center; margin-top: 30px">Images and information sourced from open sources.</p>
+</footer>
+</body>
+</html>

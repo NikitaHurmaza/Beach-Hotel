@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Beach Hotel</title>
+  <link th:rel="stylesheet" type="text/css" th:href="ReservationStyle.css">
+  <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+</head>
+
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/}"><img src="images/logo.png" class="logo"   alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="facilitiesDropdown" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">Rooms</a>
+            <ul class="dropdown-menu" aria-labelledby="facilitiesDropdown">
+              <li><a class="dropdown-item" th:href="@{/Double-Room}">Double Room</a></li>
+              <li><a class="dropdown-item" th:href="@{/Triple-Room}">Triple Room</a></li>
+              <li><a class="dropdown-item" th:href="@{/Deluxe-Room}">Deluxe room</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading1">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/Reservation}">Book</a>
+          </li>
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/invoice}">Invoice</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/admin_page}" sec:authorize="hasRole('ROLE_ADMIN')" style="color: red">Admin-page</a>
+            </li>
+          </div>
+        </ul>
+        <ul class="navbar-nav">
+
+          <div th:if="${#httpServletRequest.userPrincipal != null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal == null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/registration}">Register</a>
+            </li>
+          </div>
+          <div th:if="${#httpServletRequest.userPrincipal == null}">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<div class="container"  >
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="tab">
+        <h5 style="text-align: center; margin-top: 440px; ">Rooms</h5>
+        <hr style="width: 58px; height: 3px; color: #d7b908; background-color: #c49e04;  margin: 0 auto;">
+        <ul class="room-list">
+          <li>
+            <a th:href="@{/Double-Room}" class="room-link">
+              <img src="images/im.jpg" class="first-image" alt="Triple room">
+            </a>
+            <h5 style=" font-family: 'Baskerville Old Face'">Double Room</h5>
+            <p style="margin-top: 10px;max-width: 340px; font-family: 'Calibri Light'">Our double rooms are 20m2 and have twin beds or french beds. At least 1 adult and at the most 2 + 1 adults could accommodate in these rooms.</p>
+            <a th:href="@{/Double-Room}">
+              <button class="image-button" >VIEW ROOM</button>
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/Triple-Room}" class="room-link" >
+              <img src="images/img.jpg" class="second-image" alt="Triple room">
+            </a>
+            <h5 style="margin-left: 105px; font-family: 'Baskerville Old Face'">Triple Room</h5>
+            <p style="margin-top: 10px; margin-left: 105px; font-family: 'Calibri Light'">Our triple rooms are 23m2 and 33 m2. Each room has one french bed and twin bed. 3 adults could accommodate in these rooms.</p>
+            <a th:href="@{/Triple-Room}">
+              <button   style="margin-left: 105px" class="image-button" >VIEW ROOM</button>
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/Deluxe-Room}" class="room-link" >
+              <img src="images/lux11.jpg" class="third-image" alt="Deluxe room">
+            </a>
+            <h5 style="margin-left: 177px;  font-family: 'Baskerville Old Face'">Deluxe Room</h5>
+            <p style="margin-top: 10px; margin-left: 177px; font-family: 'Calibri Light'">Our deluxe room is 40m2 and have a french bed. At least 1 adult and at the most 5 adults could accommodate in this room</p>
+            <a th:href="@{/Deluxe-Room}">
+              <button style="margin-left: 175px" class="image-button" >VIEW ROOM</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" style="margin-top: 50px">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="tab">
+        <ul class="room-list">
+          <li class="col-md-4">
+            <div class="alert alert-warning text-center" role="alert" style="width: 70%; ">
+              <div class="btn-group">
+                <i class="fa fa-user" title="Adult"></i>
+                <i class="fa fa-user" title="Adult"></i>
+              </div>
+              <br>1 Night<br>
+              <span class="oda-yeni-fiyat">100.00 EUR</span><br>
+              <br><a data-bs-toggle="modal"  data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" role="button" class="btn btn-warning">Purchase</a>
+              <br>Available
+            </div>
+          </li>
+          <li class="col-md-4">
+            <div class="alert alert-warning text-center" role="alert" style="width: 70%; margin-left: 37px">
+              <div class="btn-group">
+                <i class="fa fa-user" title="Adult"></i>
+                <i class="fa fa-user" title="Adult"></i>
+              </div>
+              <br>1 Night<br>
+              <span class="oda-yeni-fiyat">200.00 EUR</span><br>
+              <br><a data-bs-toggle="modal" data-bs-target="#exampleModal1" data-bs-whatever="@getbootstrap" role="button" class="btn btn-warning">Purchase</a>
+              <br>Available
+            </div>
+          </li>
+          <li class="col-md-4">
+            <div class="alert alert-warning text-center" role="alert" style="width: 70%; margin-left: 69px">
+              <div class="btn-group">
+                <i class="fa fa-user" title="Adult"></i>
+                <i class="fa fa-user" title="Adult"></i>
+              </div>
+              <br>1 Night<br>
+              <span class="oda-yeni-fiyat">350.00 EUR</span><br>
+              <br><a data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap" role="button" class="btn btn-warning">Purchase</a>
+              <br>Available
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabels" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabels">To reserve</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form method="post" th:action="@{/createGuest}">
+          <div class="form-group">
+            <label for="checkInDate">Check-in Date:</label>
+            <input type="date" id="checkInDate" name="checkInDate" class="form-control" required style="width: 150px"
+                   th:value="${#temporals.format(checkInDate, 'yyyy-MM-dd')}">
+          </div>
+          <div class="form-group">
+            <label for="checkOutDate">Check-out Date:</label>
+            <input type="date" id="checkOutDate" name="checkOutDate" class="form-control" required style="width: 150px"
+                   th:value="${#temporals.format(checkOutDate, 'yyyy-MM-dd')}">
+          </div>
+          <input type="text" id="passport" name="passport" placeholder="passport" aria-label="passport" />
+          <input type="hidden" id="typeOfRoomRes" name="typeOfRoomRes" value="Double room" />
+          <p><strong>Type of Room: </strong><span id="displayTypeOfRoom">Double Room</span></p>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabels" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabels1">To reserve</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form method="post" th:action="@{/createGuest}">
+          <div class="form-group">
+            <label for="checkInDate">Check-in Date:</label>
+            <input type="date" id="checkInDate1" name="checkInDate" class="form-control" required style="width: 150px"
+                   th:value="${#temporals.format(checkInDate, 'yyyy-MM-dd')}">
+          </div>
+          <div class="form-group">
+            <label for="checkOutDate">Check-out Date:</label>
+            <input type="date" id="checkOutDate1" name="checkOutDate" class="form-control" required style="width: 150px"
+                   th:value="${#temporals.format(checkOutDate, 'yyyy-MM-dd')}">
+          </div>
+          <input type="text" id="passport1" name="passport" placeholder="passport" aria-label="passport" />
+          <input type="hidden" id="typeOfRoomRes1" name="typeOfRoomRes" value="Triple room" />
+          <p><strong>Type of Room: </strong><span id="displayTypeOfRoom1">Triple Room</span></p>
+          <button type="submit" class="btn btn-primary" >Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabels" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabels2">To reserve</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form method="post" th:action="@{/createGuest}">
+          <div class="form-group">
+            <label for="checkInDate">Check-in Date:</label>
+            <input type="date" id="checkInDate2" name="checkInDate" class="form-control" required style="width: 150px"
+                   th:value="${#temporals.format(checkInDate, 'yyyy-MM-dd')}">
+          </div>
+          <div class="form-group">
+            <label for="checkOutDate">Check-out Date:</label>
+            <input type="date" id="checkOutDate2" name="checkOutDate" class="form-control" required style="width: 150px"
+                   th:value="${#temporals.format(checkOutDate, 'yyyy-MM-dd')}">
+          </div>
+          <input type="text" id="passport2" name="passport" placeholder="passport" aria-label="passport" />
+          <input type="hidden" id="typeOfRoomRes2" name="typeOfRoomRes" value="Deluxe room" />
+          <p><strong>Type of Room: </strong><span id="displayTypeOfRoom2">Deluxe Room</span></p>
+          <button type="submit" class="btn btn-primary" >Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+
+<footer>
+  <p style="font-family: 'Calibri Light'; text-align: center; margin-top: 30px">Images and information sourced from open sources.</p>
+</footer>
+</body>
+</html>
